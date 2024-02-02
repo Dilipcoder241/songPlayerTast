@@ -135,6 +135,7 @@ const UserContextProvider = ({ children }) => {
   const playnextSong = () => {
     setaudiourl(musFiles[nextSongNo+1]?.source);
     setnextSongNo(nextSongNo+1);
+    localStorage.setItem("LastSongName", musFiles[nextSongNo+1].name);
   }
 
   const updateTimeSong = () => {
