@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef } from "react";
-import { useState } from "react"
 import Playlist from "./components/Playlist";
 import Playing from "./components/Playing";
 import Navbar from "./components/Navbar";
 import { UserContext } from "./context/UserContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion } from "framer-motion";
 
 
 function App() {
@@ -25,8 +25,8 @@ function App() {
 
 
   return (
-    <div className="h-screen w-screen relative bg-[#161A30] text-[#F0ECE5] ">
-      <div className="bg h-full w-full absolute bg-[url('/stress.jpg')] bg-no-repeat bg-cover blur-sm opacity-15"></div>
+    <div className="h-screen w-screen relative bg-[#161A30] text-[#F0ECE5]">
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.6 }} transition={{ duration: 2 }} className="bg h-full w-full absolute bg-[url('/stress.jpg')] bg-no-repeat bg-cover blur-[3px] opacity-15"></motion.div>
       <div className="main">
         <Navbar />
         <ToastContainer/>
