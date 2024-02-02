@@ -31,7 +31,7 @@ const UserContextProvider = ({ children }) => {
   const changemus = (url, name, currentSong) => {
     setCurrentSongName(name);
     localStorage.setItem("LastSongName", name);
-    setnextSongNo(currentSong + 1);
+    setnextSongNo(currentSong);
     setaudiourl(url);
     if (songbtn.current.paused) {
       songbtn.current.play();
@@ -70,7 +70,6 @@ const UserContextProvider = ({ children }) => {
       var request = objectStore.add(song);
 
       request.onsuccess = function (event) {
-        console.log("Song added successfully");
         songAdded();
       };
 
@@ -134,8 +133,8 @@ const UserContextProvider = ({ children }) => {
   }
 
   const playnextSong = () => {
-    console.log(musFiles[nextSongNo]);
-    setaudiourl(musFiles[nextSongNo].audioUrl);
+    setaudiourl(musFiles[nextSongNo+1]?.source);
+    setnextSongNo(nextSongNo+1);
   }
 
   const updateTimeSong = () => {
