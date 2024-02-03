@@ -19,4 +19,5 @@ audio::-webkit-media-controls-panel{
 
 *{
     transition: all linear 0.2s;
+    box-sizing: border-box;
 }

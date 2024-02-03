@@ -8,7 +8,7 @@ function Playlist() {
 
   const {musFiles , changemus , addMusic } = useContext(UserContext);
   return (
-    <div className="md:h-[75vh] md:w-1/3 h-[50vh] w-3/4 relative rounded-lg m-3 border-2 border-[#31304D] text-[#B6BBC4] ">
+    <div className="md:h-[75vh] md:w-1/3 h-[50vh] w-[90vw] relative rounded-lg m-3 border-2 border-[#31304D] text-[#B6BBC4] bg-[#0f082e49]">
     <h1 className='text-center capitalize text-lg '>playlist</h1>
     
     <div className='songs overflow-y-scroll md:h-5/6 h-3/4 overflow-hidden mt-10'>
