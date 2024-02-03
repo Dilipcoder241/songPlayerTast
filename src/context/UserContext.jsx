@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useRef } from "react";
 import { toast } from 'react-toastify';
 
@@ -133,9 +134,11 @@ const UserContextProvider = ({ children }) => {
   }
 
   const playnextSong = () => {
-    setaudiourl(musFiles[nextSongNo+1]?.source);
-    setnextSongNo(nextSongNo+1);
-    localStorage.setItem("LastSongName", musFiles[nextSongNo+1].name);
+    if(musFiles.length > nextSongNo+1){
+      setaudiourl(musFiles[nextSongNo+1]?.source);
+      setnextSongNo(nextSongNo+1);
+      localStorage.setItem("LastSongName", musFiles[nextSongNo+1].name);
+    }
   }
 
   const updateTimeSong = () => {
