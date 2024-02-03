@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { PiMusicNotesPlusFill } from "react-icons/pi";
 import { UserContext } from '../context/UserContext';
 import { motion } from "framer-motion";
+import { CiMusicNote1 } from "react-icons/ci";
 
 
 function Playlist() {
@@ -13,7 +14,12 @@ function Playlist() {
     
     <div className='songs overflow-y-scroll md:h-5/6 h-3/4 overflow-hidden mt-10'>
     {musFiles.map((mus , index)=>{
-      return <button key={index} onClick={()=>{changemus(mus.source , mus.name , index)}} className="hover:bg-[#464194] hover:border-[#818181] border-y-2 text-left w-full py-2 my-4 px-4 border-[#31304D] flex items-center justify-between">{mus.name.split('.')[0]}</button>
+      return (
+        <div className='hover:bg-[#464194] hover:border-[#818181] border-y-2 flex gap-4 items-center  w-full py-2 my-4 px-4 border-[#31304D]'>
+          <CiMusicNote1 className='text-xl'/>
+          <button key={index} onClick={()=>{changemus(mus.source , mus.name , index)}} className="">{mus.name.split('.')[0]}</button>
+        </div>
+      )
     })}
     </div>
 
