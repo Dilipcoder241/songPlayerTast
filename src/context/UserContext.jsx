@@ -13,6 +13,7 @@ const UserContextProvider = ({ children }) => {
   const [currentSongName, setCurrentSongName] = useState("");
   const [nextSongNo, setnextSongNo] = useState(0);
   const songAdded = () => toast("Song Added Successfully");
+  const songDeleted = () => toast("Song Deleted Successfully");
 
 
   const submitfile = (event) => {
@@ -126,7 +127,10 @@ const UserContextProvider = ({ children }) => {
   };
 
   const DeleteSong = (source) => {
-    if(audiourl == source){setaudiourl('')}
+    if(audiourl == source){
+      setaudiourl('');
+      setCurrentSongName('');
+    }
     setmusFiles(musFiles.filter((song) => song.source != source));
     var request = indexedDB.open('MySongDatabase', 1);
     var db;
@@ -152,8 +156,7 @@ const UserContextProvider = ({ children }) => {
         if (songId !== undefined) {
           const deleteRequest = objectStore.delete(songId);
           deleteRequest.onsuccess = function (event) {
-            console.log('Song deleted successfully');
-           
+            songDeleted();
           };
           deleteRequest.onerror = function (event) {
             console.error('Error deleting song:', event.target.error);
