@@ -83,10 +83,10 @@ const UserContextProvider = ({ children }) => {
 
   }
 
-  async function retrieveSongs() {
+  function retrieveSongs() {
 
     try {
-      const request = await indexedDB.open('MySongDatabase', 1);
+      const request = indexedDB.open('MySongDatabase', 1);
 
       request.onerror = function (event) {
         console.error('Database error: ' + event.target.errorCode);
@@ -125,12 +125,59 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
-  async function setTolastPlay() {
+  const DeleteSong = (source) => {
+    if(audiourl == source){setaudiourl('')}
+    setmusFiles(musFiles.filter((song) => song.source != source));
+    var request = indexedDB.open('MySongDatabase', 1);
+    var db;
+
+    request.onupgradeneeded = function (event) {
+      db = event.target.result;
+      var objectStore = db.createObjectStore("songs", { keyPath: "id", autoIncrement: true });
+      objectStore.createIndex("name", "name", { unique: false });
+      objectStore.createIndex("source", "source", { unique: false });
+
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const transaction = db.transaction(['songs'], "readwrite");
+      const objectStore = transaction.objectStore('songs');
+
+      const index = objectStore.index('source');
+      const getRequest = index.getKey(source);
+
+      getRequest.onsuccess = function (event) {
+        const songId = event.target.result;
+        if (songId !== undefined) {
+          const deleteRequest = objectStore.delete(songId);
+          deleteRequest.onsuccess = function (event) {
+            console.log('Song deleted successfully');
+           
+          };
+          deleteRequest.onerror = function (event) {
+            console.error('Error deleting song:', event.target.error);
+          };
+        } else {
+          console.log('Song with source ' + source + ' not found');
+        }
+      };
+
+    };
+
+    request.onerror = function (event) {
+      console.log('Error opening database: ' + event.target.errorCode);
+    };
+  }
+
+  function setTolastPlay() {
     let index = musFiles.findIndex(file => file.name === localStorage.getItem("LastSongName"));
     setaudiourl(musFiles[index]?.source);
-    songbtn.current.currentTime = localStorage.getItem("lastTime");
-    songbtn.current.play();
-    setCurrentSongName(musFiles[index]?.name)
+    if(index>=0){
+      songbtn.current.currentTime = localStorage.getItem("lastTime");
+      songbtn.current.play();
+      setCurrentSongName(musFiles[index]?.name)
+    }
   }
 
   const playnextSong = () => {
@@ -148,7 +195,7 @@ const UserContextProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ submitfile, musFiles, setmusFiles, changemus, audiourl, setaudiourl, addSong, retrieveSongs, setTolastPlay, playnextSong, updateTimeSong, songbtn, addMusic, videoRef, currentSongName, setCurrentSongName, nextSongNo, setnextSongNo }}>
+    <UserContext.Provider value={{ submitfile, musFiles, setmusFiles, changemus, audiourl, setaudiourl, addSong, retrieveSongs, setTolastPlay, playnextSong, updateTimeSong, songbtn, addMusic, videoRef, currentSongName, setCurrentSongName, nextSongNo, setnextSongNo , DeleteSong }}>
       {children}
     </UserContext.Provider>
   )

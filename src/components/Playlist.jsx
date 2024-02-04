@@ -3,11 +3,12 @@ import { PiMusicNotesPlusFill } from "react-icons/pi";
 import { UserContext } from '../context/UserContext';
 import { motion } from "framer-motion";
 import { CiMusicNote1 } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
 
 
 function Playlist() {
 
-  const {musFiles , changemus , addMusic } = useContext(UserContext);
+  const {musFiles , changemus , addMusic, DeleteSong } = useContext(UserContext);
   return (
     <div className="md:h-[75vh] md:w-1/3 h-[50vh] w-[90vw] relative rounded-lg m-3 border-2 border-[#31304D] text-[#B6BBC4] bg-[#0f082e49]">
     <h1 className='text-center capitalize text-lg '>playlist</h1>
@@ -15,9 +16,13 @@ function Playlist() {
     <div className='songs overflow-y-scroll md:h-5/6 h-3/4 overflow-hidden mt-10'>
     {musFiles.map((mus , index)=>{
       return (
-        <div className='hover:bg-[#464194] hover:border-[#818181] border-y-2 flex gap-4 items-center  w-full py-2 my-4 px-4 border-[#31304D]'>
+        <div key={index} className='hover:bg-[#464194] hover:border-[#818181] border-y-2 flex justify-between items-center  w-full py-2 my-4 px-4 border-[#31304D]'>
+          <div className="flex items-center gap-4">
           <CiMusicNote1 className='text-xl'/>
           <button key={index} onClick={()=>{changemus(mus.source , mus.name , index)}} className="">{mus.name.split('.')[0]}</button>
+          </div>
+          <MdDelete className='text-xl hover:text-red-500' onClick={()=>{DeleteSong(mus.source)}}/>
+
         </div>
       )
     })}
