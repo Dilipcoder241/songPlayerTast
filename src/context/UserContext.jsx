@@ -12,12 +12,15 @@ const UserContextProvider = ({ children }) => {
   const videoRef = useRef(null);
   const [currentSongName, setCurrentSongName] = useState("");
   const [nextSongNo, setnextSongNo] = useState(0);
-  const songAdded = () => toast("Song Added Successfully");
-  const songDeleted = () => toast("Song Deleted Successfully");
+  const songAdded = () => toast.success("Song Added Successfully" , {position: "top-center"});
+  const songDeleted = () => toast.success("Song Deleted Successfully" , {position: "top-center"});
+  const UploadError = () => toast.error("Please Upload a mp3 file", {position: "top-center"});
 
 
   const submitfile = (event) => {
     const file = event.target.files[0];
+
+    if(file.name.split('.')[1] !== "mp3"){ UploadError(); return }
 
     var reader = new FileReader();
     reader.onload = function (event) {

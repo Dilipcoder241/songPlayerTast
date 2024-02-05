@@ -16,10 +16,10 @@ function Playlist() {
     <div className='songs overflow-y-scroll md:h-5/6 h-3/4 overflow-hidden mt-10'>
     {musFiles.map((mus , index)=>{
       return (
-        <div key={index} className='hover:bg-[#464194] hover:border-[#818181] border-y-2 flex justify-between items-center  w-full py-2 my-4 px-4 border-[#31304D]'>
-          <div className="flex items-center gap-4">
+        <div key={index} className='hover:bg-[#464194] hover:border-[#818181] border-y-2 flex justify-between items-center  w-full my-4 px-4  border-[#31304D]'>
+          <div onClick={()=>{changemus(mus.source , mus.name , index)}} className="flex items-center gap-4 w-full h-full py-2 ">
           <CiMusicNote1 className='text-xl'/>
-          <button key={index} onClick={()=>{changemus(mus.source , mus.name , index)}} className="">{mus.name.split('.')[0]}</button>
+          <button key={index} >{mus.name.split('.')[0]}</button>
           </div>
           <MdDelete className='text-xl hover:text-red-500' onClick={()=>{DeleteSong(mus.source)}}/>
 

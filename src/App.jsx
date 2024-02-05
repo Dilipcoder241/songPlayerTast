@@ -44,7 +44,7 @@ function App() {
         <Navbar />
         <ToastContainer />
         <div className="flex relative z-10 items-center justify-center mt-5 flex-col md:flex-row">
-          <input ref={addMusic} type="file" onChange={submitfile} className="hidden" />
+          <input ref={addMusic} type="file" onChange={submitfile} className="hidden" accept=".mp3"/>
           <Playing />
           <Playlist />
         </div>
