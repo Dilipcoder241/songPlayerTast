@@ -48,7 +48,7 @@ function App() {
           <Playing />
           <Playlist />
         </div>
-        <audio ref={songbtn} src={audiourl} onTimeUpdate={updateTimeSong} onEnded={playnextSong} onPause={() => { videoRef.current.pause() }} onPlay={() => { videoRef.current.play() }} controls className="fixed bottom-0 w-full opacity-60"></audio>
+        <audio ref={songbtn} src={audiourl} onTimeUpdate={updateTimeSong} onEnded={playnextSong} onPause={() => { videoRef.current.pause() }} onPlay={() => { videoRef.current.play() }} controls className="fixed z-20 bottom-0 w-full opacity-60"></audio>
       </div>
     </div>
 
