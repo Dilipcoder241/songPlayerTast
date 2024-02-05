@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className="h-screen w-screen relative bg-[#161A30] text-[#F0ECE5] overflow-hidden">
-      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.6 }} transition={{ duration: 2 }} className="bg h-full w-full absolute bg-[url('/stress.jpg')] bg-no-repeat bg-cover blur-[3px] opacity-15"></motion.div>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.6 }} transition={{ duration: 2 }} className="bg h-full w-full absolute bg-[url('/stress.jpg')] bg-no-repeat bg-cover bg-center blur-[2px] opacity-15"></motion.div>
       <div className="main">
         <motion.div variants={variants} animate="default" className='md:block hidden pointer-events-none h-52 w-52 blur-xl absolute bg-[#2d1b628f] rounded-full'></motion.div>
         <Navbar />
