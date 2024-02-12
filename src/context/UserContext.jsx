@@ -17,10 +17,10 @@ const UserContextProvider = ({ children }) => {
   const UploadError = () => toast.error("Please Upload a mp3 file", {position: "top-center"});
 
 
+
   const submitfile = (event) => {
     const file = event.target.files[0];
-
-    if(file.name.split('.')[1] !== "mp3"){ UploadError(); return }
+    if(file.name.split('.').pop() !== "mp3"){ UploadError(); return }
 
     var reader = new FileReader();
     reader.onload = function (event) {
@@ -133,6 +133,7 @@ const UserContextProvider = ({ children }) => {
     if(audiourl == source){
       setaudiourl('');
       setCurrentSongName('');
+      videoRef.current.pause();
     }
     setmusFiles(musFiles.filter((song) => song.source != source));
     var request = indexedDB.open('MySongDatabase', 1);

@@ -14,7 +14,7 @@ function Playlist() {
     <h1 className='text-center capitalize text-lg '>playlist</h1>
     
     <div className='songs overflow-y-scroll md:h-5/6 h-3/4 overflow-hidden mt-10'>
-    {musFiles.map((mus , index)=>{
+    {musFiles.length<=0?"Please click on the above button to add music to playlist" : musFiles.map((mus , index)=>{
       return (
         <div key={index} className='hover:bg-[#464194] hover:border-[#818181] border-y-2 flex gap-4 justify-between items-center  w-full my-4 px-4  border-[#31304D]'>
           <div onClick={()=>{changemus(mus.source , mus.name , index)}} className="flex items-center gap-4 w-full h-full py-2 cursor-pointer">
